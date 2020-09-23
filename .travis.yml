@@ -30,9 +30,8 @@ jobs:
         - ln -sf Vagrantfile.fedora32 Vagrantfile
         - sudo vagrant up && sudo mkdir -p /root/.ssh && sudo sh -c "vagrant ssh-config >> /root/.ssh/config"
         - if [[ "${TRAVIS_CPU_ARCH}" == "ppc64le" ]]; then
-	     wget https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/31/Everything/x86_64/os/Packages/s/ShellCheck-0.7.0-1.fc31.x86_64.rpm
-	     rpm -ivh ShellCheck-0.7.0-1.fc31.x86_64.rpm
-	  fi
+	      sudo apt-get install ShellCheck
+          fi
       script:
         - sudo ssh default -t 'cd /vagrant && sudo make localunittest'
         # cgroupv2+systemd: test on vagrant host itself as we need systemd
